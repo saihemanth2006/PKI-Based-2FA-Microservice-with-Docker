@@ -33,7 +33,8 @@ RUN apt-get update && \
     apt-get install -y --no-install-recommends \
         cron \
         tzdata \
-        ca-certificates && \
+        ca-certificates \
+        procps && \
     # Configure timezone
     ln -snf /usr/share/zoneinfo/UTC /etc/localtime && \
     echo "UTC" > /etc/timezone && \
