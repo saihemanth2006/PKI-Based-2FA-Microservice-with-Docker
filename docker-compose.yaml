@@ -1,0 +1,48 @@
+services:
+  app:
+    # Build configuration
+    build:
+      context: .
+      dockerfile: Dockerfile
+    
+    # Container name
+    container_name: pki-2fa-app
+    
+    # Port mapping
+    ports:
+      - "8080:8080"
+    
+    # Volume mounts
+    volumes:
+      # Named volumes for persistent data
+      - seed-data:/data
+      - cron-output:/cron
+      
+      # Mount key files as read-only (for container access)
+      - ./student_private.pem:/app/student_private.pem:ro
+      - ./student_public.pem:/app/student_public.pem:ro
+      - ./instructor_public.pem:/app/instructor_public.pem:ro
+    
+    # Environment variables
+    environment:
+      - TZ=UTC
+      - SEED_FILE_PATH=/data/seed.txt
+      - PRIVATE_KEY_PATH=/app/student_private.pem
+    
+    # Restart policy
+    restart: unless-stopped
+    
+    # Health check (optional but recommended)
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+
+# Named volumes
+volumes:
+  seed-data:
+    driver: local
+  cron-output:
+    driver: local
