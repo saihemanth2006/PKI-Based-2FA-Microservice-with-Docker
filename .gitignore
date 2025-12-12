@@ -1,6 +1,10 @@
 # Encrypted seed - never commit
 encrypted_seed.txt
 
+# Environment files
+.env
+.env.*
+
 # Python environment
 .venv/
 __pycache__/
