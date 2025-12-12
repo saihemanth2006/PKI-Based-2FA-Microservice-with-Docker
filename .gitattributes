@@ -1,0 +1,12 @@
+# Ensure shell scripts and cron files always use LF line endings
+*.sh text eol=lf
+scripts/totp_cron text eol=lf
+scripts/generate_totp_cron.py text eol=lf
+
+# Python files
+*.py text eol=lf
+
+# Docker files
+Dockerfile text eol=lf
+docker-compose.yaml text eol=lf
+docker-compose.yml text eol=lf

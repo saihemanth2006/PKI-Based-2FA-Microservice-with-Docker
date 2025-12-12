@@ -1,0 +1,2 @@
+# Run TOTP generation every minute
+* * * * * root cd /app && /usr/local/bin/python3 /app/scripts/generate_totp_cron.py >> /var/log/cron.log 2>&1
